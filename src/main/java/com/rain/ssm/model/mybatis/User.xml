@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rain.ssm.dao.UserDao" >
+
+    <sql id="inc_whereClause" >
+        <where>
+            <if test="userId!=null">
+                and userId = #{userId}
+            </if>
+            <if test="userName!=null and userName!=''">
+                and userName = #{userName}
+            </if>
+            <if test="age!=null">
+                and age = #{age}
+            </if>
+            <if test="phoneNo!=null">
+                and phoneNo = #{phoneNo}
+            </if>
+            <if test="password!=null">
+                and password = #{password}
+            </if>
+        </where>
+    </sql>
+    
+    <select id="getPageCount" resultType="java.lang.Integer">
+  	  SELECT count(*) FROM user
+  </select>
+    
+     <select id="getUserByPage" resultType="com.rain.ssm.model.User" >
+  	   SELECT * FROM user 
+  </select>
+    
+    <select id="getUserByPhoneNo" resultType="com.rain.ssm.model.User">
+        SELECT * from user where phoneNo=#{phoneNo, jdbcType=VARCHAR}
+    </select>
+
+    <insert id="createUser">
+        INSERT INTO user(userName, age,phoneNo,password) VALUES (#{userName, jdbcType=VARCHAR}, #{age, jdbcType=INTEGER}, #{phoneNo , jdbcType=VARCHAR}, #{password , jdbcType=VARCHAR})
+    </insert>
+
+    <delete id="deleteUser">
+        DELETE FROM user
+        <include refid="inc_whereClause"/>
+    </delete>
+
+    <delete id="batchDeleteUser">
+        DELETE FROM user
+        where userId in
+        <foreach collection="list" item="userId" open="(" close=")" separator=",">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <update id="updateUser">
+      UPDATE user
+      <set>
+          <if test="userName!=null">
+              userName = #{userName, jdbcType=VARCHAR},
+          </if>
+          <if test="age!=null">
+              age = #{age, jdbcType=INTEGER},
+          </if>
+          <if test="password!=null">
+              password =  #{password , jdbcType=VARCHAR},
+          </if>
+      </set>
+      where phoneNo = #{phoneNo , jdbcType=VARCHAR}
+    </update>
+
+    <select id="findUserByParams" resultType="com.rain.ssm.model.User">
+        SELECT userId as userId, userName as userName, age as age
+        from user
+        <include refid="inc_whereClause"/>
+    </select>
+    
+    <select id="findAll" resultType="com.rain.ssm.model.User">
+        SELECT *  from user
+    </select>
+    
+
+
+</mapper>

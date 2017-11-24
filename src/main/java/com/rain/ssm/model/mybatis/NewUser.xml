@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rain.ssm.dao.NewUserDao" >
+<resultMap id="BaseResultMap" type="com.rain.ssm.model.NewUser">
+		<id column="id" jdbcType="BIGINT" property="id" />
+		<result column="addTime" jdbcType="TIMESTAMP" property="addtime" />
+		<result column="deleteStatus" jdbcType="BIT" property="deletestatus" />
+		<result column="MSN" jdbcType="VARCHAR" property="msn" />
+		<result column="QQ" jdbcType="VARCHAR" property="qq" />
+		<result column="WW" jdbcType="VARCHAR" property="ww" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="availableBalance" jdbcType="DECIMAL" property="availablebalance" />
+		<result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+		<result column="email" jdbcType="VARCHAR" property="email" />
+		<result column="freezeBlance" jdbcType="DECIMAL" property="freezeblance" />
+		<result column="gold" jdbcType="INTEGER" property="gold"/>
+		<result column="integral" jdbcType="INTEGER" property="integral" />
+		<result column="lastLoginDate" jdbcType="TIMESTAMP" property="lastlogindate" />
+		<result column="lastLoginIp" jdbcType="VARCHAR" property="lastloginip" />
+		<result column="loginCount" jdbcType="INTEGER" property="logincount" />
+		<result column="loginDate" jdbcType="TIMESTAMP" property="logindate" />
+		<result column="loginIp" jdbcType="VARCHAR" property="loginip" />
+		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="report" jdbcType="INTEGER" property="report" />
+		<result column="sex" jdbcType="INTEGER" property="sex" />
+		<result column="status" jdbcType="CHAR" property="status" />
+		<result column="telephone" jdbcType="VARCHAR" property="telephone" />
+		<result column="trueName" jdbcType="VARCHAR" property="truename" />
+		<result column="userName" jdbcType="VARCHAR" property="username" />
+		<result column="userRole" jdbcType="VARCHAR" property="userrole" />
+		<result column="user_credit" jdbcType="INTEGER" property="userCredit" />
+		<result column="photo_url" jdbcType="VARCHAR" property="photoUrl" />
+		<result column="store_id" jdbcType="BIGINT" property="storeId" />
+		<result column="qq_openid" jdbcType="VARCHAR" property="qqOpenid" />
+		<result column="sina_openid" jdbcType="VARCHAR" property="sinaOpenid" />
+		<result column="parent_id" jdbcType="BIGINT" property="parentId" />
+		<result column="years" jdbcType="INTEGER" property="years" />
+		<result column="area_id" jdbcType="BIGINT" property="areaId" />
+		<result column="invitation_code" jdbcType="VARCHAR" property="invitationCode" />
+		<result column="wx_openid" jdbcType="VARCHAR" property="wxOpenid" />
+		<result column="cashing" jdbcType="VARCHAR" property="cashing" />
+	</resultMap>
+	
+	  <select id="getUserBytelephone" resultType="com.rain.ssm.model.NewUser">
+        SELECT * from new_user where telephone=#{telephone, jdbcType=VARCHAR}
+    </select>
+
+<insert id="insertSelective" parameterType="com.rain.ssm.model.NewUser">
+		insert into new_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="addtime != null">
+				addTime,
+			</if>
+			<if test="deletestatus != null">
+				deleteStatus,
+			</if>
+			<if test="msn != null">
+				MSN,
+			</if>
+			<if test="qq != null">
+				QQ,
+			</if>
+			<if test="ww != null">
+				WW,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="availablebalance != null">
+				availableBalance,
+			</if>
+			<if test="birthday != null">
+				birthday,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="freezeblance != null">
+				freezeBlance,
+			</if>
+			<if test="gold != null">
+				gold,
+			</if>
+			<if test="integral != null">
+				integral,
+			</if>
+			<if test="lastlogindate != null">
+				lastLoginDate,
+			</if>
+			<if test="lastloginip != null">
+				lastLoginIp,
+			</if>
+			<if test="logincount != null">
+				loginCount,
+			</if>
+			<if test="logindate != null">
+				loginDate,
+			</if>
+			<if test="loginip != null">
+				loginIp,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="report != null">
+				report,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="telephone != null">
+				telephone,
+			</if>
+			<if test="truename != null">
+				trueName,
+			</if>
+			<if test="username != null">
+				userName,
+			</if>
+			<if test="userrole != null">
+				userRole,
+			</if>
+			<if test="userCredit != null">
+				user_credit,
+			</if>
+			<if test="photoUrl != null">
+				photo_url,
+			</if>
+			<if test="storeId != null">
+				store_id,
+			</if>
+			<if test="qqOpenid != null">
+				qq_openid,
+			</if>
+			<if test="sinaOpenid != null">
+				sina_openid,
+			</if>
+			<if test="parentId != null">
+				parent_id,
+			</if>
+			<if test="years != null">
+				years,
+			</if>
+			<if test="areaId != null">
+				area_id,
+			</if>
+			<if test="invitationCode != null">
+				invitation_code,
+			</if>
+			<if test="storeQuickMenu != null">
+				store_quick_menu,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=BIGINT},
+			</if>
+			<if test="addtime != null">
+				#{addtime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="deletestatus != null">
+				#{deletestatus,jdbcType=BIT},
+			</if>
+			<if test="msn != null">
+				#{msn,jdbcType=VARCHAR},
+			</if>
+			<if test="qq != null">
+				#{qq,jdbcType=VARCHAR},
+			</if>
+			<if test="ww != null">
+				#{ww,jdbcType=VARCHAR},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="availablebalance != null">
+				#{availablebalance,jdbcType=DECIMAL},
+			</if>
+			<if test="birthday != null">
+				#{birthday,jdbcType=TIMESTAMP},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="freezeblance != null">
+				#{freezeblance,jdbcType=DECIMAL},
+			</if>
+			<if test="gold != null">
+				#{gold,jdbcType=INTEGER},
+			</if>
+			<if test="integral != null">
+				#{integral,jdbcType=INTEGER},
+			</if>
+			<if test="lastlogindate != null">
+				#{lastlogindate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastloginip != null">
+				#{lastloginip,jdbcType=VARCHAR},
+			</if>
+			<if test="logincount != null">
+				#{logincount,jdbcType=INTEGER},
+			</if>
+			<if test="logindate != null">
+				#{logindate,jdbcType=TIMESTAMP},
+			</if>
+			<if test="loginip != null">
+				#{loginip,jdbcType=VARCHAR},
+			</if>
+			<if test="mobile != null">
+				#{mobile,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="report != null">
+				#{report,jdbcType=INTEGER},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=CHAR},
+			</if>
+			<if test="telephone != null">
+				#{telephone,jdbcType=VARCHAR},
+			</if>
+			<if test="truename != null">
+				#{truename,jdbcType=VARCHAR},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="userrole != null">
+				#{userrole,jdbcType=VARCHAR},
+			</if>
+			<if test="userCredit != null">
+				#{userCredit,jdbcType=INTEGER},
+			</if>
+			<if test="photoUrl != null">
+				#{photoUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="storeId != null">
+				#{storeId,jdbcType=BIGINT},
+			</if>
+			<if test="qqOpenid != null">
+				#{qqOpenid,jdbcType=VARCHAR},
+			</if>
+			<if test="sinaOpenid != null">
+				#{sinaOpenid,jdbcType=VARCHAR},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=BIGINT},
+			</if>
+			<if test="years != null">
+				#{years,jdbcType=INTEGER},
+			</if>
+			<if test="areaId != null">
+				#{areaId,jdbcType=BIGINT},
+			</if>
+			<if test="invitationCode != null">
+				#{invitationCode,jdbcType=VARCHAR},
+			</if>
+			<if test="storeQuickMenu != null">
+				#{storeQuickMenu,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+  <!-- 查询个人资料 -->
+	<select id="findUserInfo" resultType="com.rain.ssm.model.NewUser">
+		select * from new_user 
+	</select>   
+    
+
+</mapper>

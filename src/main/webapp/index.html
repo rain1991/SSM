@@ -1,0 +1,150 @@
+<html>
+<head>
+ <meta http-equiv="content-type" content="txt/html; charset=utf-8" />
+<link rel="stylesheet" href="./common/media/css/bootstrap.min.css" type="text/css" />
+<script type="text/javascript" src="./common/media/js/jquery-1.10.1.min.js"></script>
+
+</head>
+<body>
+<h2>Hello，我是index.html</h2>
+<br>
+ <input style="margin-left:20px;" type="button" onclick="getUserAll()" id="test1" value="获得用户"/> 
+ <input style="margin-left:20px;" type="button" onclick="addUser()" id="test1" value="添加用户"/> 
+ <input style="margin-left:20px;" type="button" onclick="addNewUser()" id="test1" value="添加NewUser"/> 
+ <input style="margin-left:20px;" type="button" onclick="getPageUser()" id="test1" value="分页查询"/> 
+ <input style="margin-left:20px;" type="button" onclick="login()" id="test1" value="登陆"/> 
+<a href="./pages/userList.html" target="_blank">去测试freemarker</a>
+ <br/>
+ <textarea style="margin:20px;" rows="10" cols="100" id="textarea1"></textarea>
+</body>
+</html>
+<script type="text/javascript">
+var basePath='http://172.19.226.157:8080/ssm';
+var token = '';
+
+//添加用户
+function addNewUser() {
+	  $.ajax({
+		  type:'POST',
+        url: basePath + '/newUser/register',
+        dataType: 'json',
+        data :JSON.stringify(
+    		  	{param:{
+    		  		userName : "小王",
+    		  		email:'39123264@163.com',
+    		  		password:'123456',
+    		  		telephone:'18862123185',
+    		  		sex:'1',
+    		  		birthday:'1991-02-23',
+    		  		token : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHQiOjE0OTYzNzY2NDE4NTMsInVpZCI6MzMwMDUsImlhdCI6MTQ5NjM3MzA0MTg1M30.r1INSFfs7v9j6GP-rsjafPvBeGtnHseIn7LnAJdqdic"
+    			  }
+    			}), 
+        success: function (data) {
+      		if(data.flag=='1'){
+      			document.getElementById('textarea1').innerText=data.msg;
+      		}else{
+      			console.log(data.msg);
+      			document.getElementById('textarea1').innerText=data.msg;
+      		}
+        }
+});
+};
+
+//分页查询
+function getPageUser() {
+	  $.ajax({
+		  type:'POST',
+          url: basePath + '/user/getPageUser',
+          dataType: 'json',
+          data : JSON.stringify(
+    		  	{param:{
+    		  		'pageSize':'1',
+    		  		'userName':'',
+    		  		'token' : token
+    			  }
+    			}), 
+          success: function (data) {
+        		if(data.flag=='1'){
+        			var result=data.data;
+        			console.log(result);
+        			document.getElementById('textarea1').innerText=JSON.stringify(data);
+        		}else{
+        			console.log(data.msg);
+        			document.getElementById('textarea1').innerText=JSON.stringify(data.msg);
+        		}
+          }
+});
+};
+
+//登陆
+function login() {
+	  $.ajax({
+		  type:'POST',
+          url: basePath + '/user/login',
+          dataType: 'json',
+          data : JSON.stringify(
+    		  	{param:{
+    		  		phoneNo : "18862123185",
+    		  		password:'123456'
+    			  }
+    			}), 
+          success: function (data) {
+        		if(data.flag=='1'){
+        			token = data.token;
+        			console.log(token);
+        			document.getElementById('textarea1').innerText=JSON.stringify(token);
+        		}else{
+        			console.log(data.msg);
+        		}
+          }
+});
+};
+//获得所有数据
+function getUserAll() {
+	  $.ajax({
+		  type:'POST',
+          url: basePath + '/user/all',
+          dataType: 'json',
+          data : JSON.stringify(
+    		  	{param:{
+    		  		'token' : token
+    			  }
+    			}), 
+          success: function (data) {
+        		if(data.flag=='1'){
+        			var result=data.data;
+        			console.log(result);
+        			document.getElementById('textarea1').innerText=JSON.stringify(result);
+        		}else{
+        			console.log(data.msg);
+        			document.getElementById('textarea1').innerText=JSON.stringify(data.msg);
+        		}
+          }
+});
+};
+//添加用户
+function addUser() {
+	  $.ajax({
+		  type:'POST',
+        url: basePath + '/user/register',
+        dataType: 'json',
+        data :JSON.stringify(
+    		  	{param:{
+    		  		userName : "小王",
+    		  		age:21,
+    		  		password:'123456',
+    		  		phoneNo:'18862123188',
+    		  		token : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHQiOjE0OTYzNzY2NDE4NTMsInVpZCI6MzMwMDUsImlhdCI6MTQ5NjM3MzA0MTg1M30.r1INSFfs7v9j6GP-rsjafPvBeGtnHseIn7LnAJdqdic"
+    			  }
+    			}), 
+        success: function (data) {
+      		if(data.flag=='1'){
+      			document.getElementById('textarea1').innerText=data.msg;
+      		}else{
+      			console.log(data.msg);
+      			document.getElementById('textarea1').innerText=data.msg;
+      		}
+        }
+});
+};
+</script>
