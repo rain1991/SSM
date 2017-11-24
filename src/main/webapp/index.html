@@ -19,7 +19,8 @@
 </body>
 </html>
 <script type="text/javascript">
-var basePath='http://172.19.226.157:8080/ssm';
+var basePath='http:///127.0.0.1:8080/ssm';
+var basePath1='http:///127.0.0.1:8080/SSM/ssm';
 var token = '';
 
 //添加用户
@@ -33,7 +34,7 @@ function addNewUser() {
     		  		userName : "小王",
     		  		email:'39123264@163.com',
     		  		password:'123456',
-    		  		telephone:'18862123185',
+    		  		telephone:'18862123888',
     		  		sex:'1',
     		  		birthday:'1991-02-23',
     		  		token : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHQiOjE0OTYzNzY2NDE4NTMsInVpZCI6MzMwMDUsImlhdCI6MTQ5NjM3MzA0MTg1M30.r1INSFfs7v9j6GP-rsjafPvBeGtnHseIn7LnAJdqdic"
@@ -84,7 +85,7 @@ function login() {
           dataType: 'json',
           data : JSON.stringify(
     		  	{param:{
-    		  		phoneNo : "18862123185",
+    		  		phoneNo : "18862123888",
     		  		password:'123456'
     			  }
     			}), 

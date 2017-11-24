@@ -18,6 +18,7 @@
 </html>
 <script type="text/javascript">
 var basePath='http://127.0.0.1:8080/ssm';
+var basePath1='http:///127.0.0.1:8080/SSM/ssm';
 var token = '';
 //登陆
 function login() {
@@ -27,7 +28,7 @@ function login() {
           dataType: 'json',
           data : JSON.stringify(
     		  	{param:{
-    		  		phoneNo : "18862123185",
+    		  		phoneNo : "18862123888",
     		  		password:'123456'
     			  }
     			}), 
